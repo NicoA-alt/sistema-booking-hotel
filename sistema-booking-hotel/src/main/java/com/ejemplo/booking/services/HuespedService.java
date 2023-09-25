@@ -46,8 +46,8 @@ public class HuespedService {
         try {
             Huesped huesped = huespedRepository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST,"Huesped no encontrado"));
             return ResponseEntity.ok(huesped);
-        } catch (HttpClientErrorException e) {
-            return ResponseEntity.status(e.getRawStatusCode()).body(e.getResponseBodyAsString());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
     public ResponseEntity actualizarHuesped(Integer id, Huesped huesped) {

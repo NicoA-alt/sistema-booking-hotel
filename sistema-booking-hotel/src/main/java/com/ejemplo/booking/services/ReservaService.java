@@ -49,8 +49,8 @@ public class ReservaService {
         try {
             Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST,"Reserva no encontrada"));
             return ResponseEntity.ok(reserva);
-        } catch (HttpClientErrorException e) {
-            return ResponseEntity.status(e.getRawStatusCode()).body(e.getResponseBodyAsString());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
     public ResponseEntity actualizarReserva(Integer id, Reserva reserva) {

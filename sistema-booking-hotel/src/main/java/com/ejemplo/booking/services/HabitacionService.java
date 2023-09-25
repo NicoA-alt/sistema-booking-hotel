@@ -50,7 +50,7 @@ public class HabitacionService {
     }
     public ResponseEntity obtenerHabitacionPorId(Integer id) {
         try {
-            Habitacion habitacion = habitacionRepository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST,"Habitacion no encontrada"));
+            Habitacion habitacion = habitacionRepository.findById(id).get();
             return ResponseEntity.ok(habitacion);
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
@@ -80,7 +80,7 @@ public class HabitacionService {
     }
     public ResponseEntity obtenerReservasDeHabitacion(Integer id) {
         try {
-            Habitacion habitacion = habitacionRepository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST,"Habitacion no encontrada"));
+            Habitacion habitacion = habitacionRepository.findById(id).get();
             return ResponseEntity.ok(habitacion.getReservas());
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
